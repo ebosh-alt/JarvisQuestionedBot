@@ -1,10 +1,16 @@
 services:
   bot:
     build: .
-    container_name: bot_reward_tasks
+    container_name: jarvis_questioned_bot
     restart: unless-stopped
     networks:
-        - common_net
+      - common_net
+    volumes:
+      - sqlite_data:/data
+
+
+volumes:
+  sqlite_data:
 
 networks:
   common_net:
