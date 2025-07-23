@@ -3,15 +3,9 @@ services:
     build: .
     container_name: jarvis_questioned_bot
     restart: unless-stopped
-    networks:
-      - common_net
     volumes:
       - sqlite_data:/data
 
 
 volumes:
   sqlite_data:
-
-networks:
-  common_net:
-    external: true
