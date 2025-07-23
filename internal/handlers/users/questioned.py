@@ -15,6 +15,7 @@ router = Router()
 
 config = Config.load()
 
+
 @router.message(Command("reset"))
 @router.callback_query(F.data == "start_questioned")
 async def start(message: CallbackQuery, state: FSMContext):
@@ -24,15 +25,23 @@ async def start(message: CallbackQuery, state: FSMContext):
     step_id = 0
     questioned = QuestionedData()
     await state.set_state(UserStates.steps)
-
-    msg = await bot.send_message(chat_id=user_id,
-                                 text=steps_schema.steps[0].prompt,
-                                 reply_markup=steps_schema.steps[0].keyboard
-                                 )
+    if type(message) is CallbackQuery:
+        message_id = message.message.message_id
+        await bot.edit_message_text(chat_id=user_id,
+                                    message_id=message_id,
+                                    text=steps_schema.steps[0].prompt,
+                                    reply_markup=steps_schema.steps[0].keyboard
+                                    )
+    else:
+        msg = await bot.send_message(chat_id=user_id,
+                                     text=steps_schema.steps[0].prompt,
+                                     reply_markup=steps_schema.steps[0].keyboard
+                                     )
+        message_id = msg.message_id
 
     await state.update_data(step_id=step_id,
                             questioned=questioned,
-                            message_id=msg.message_id)
+                            message_id=message_id)
 
 
 @router.message(UserStates.steps)
@@ -86,7 +95,6 @@ async def step_callback(message: CallbackQuery, state: FSMContext):
         user.age = questioned.age
         user.position = questioned.position
         user.ai_level = questioned.ai_level
-        user.position_repeat = questioned.position_repeat
         await users.update(user)
         await state.clear()
         return await bot.edit_message_text(chat_id=user_id,
