@@ -16,6 +16,7 @@ router = Router()
 
 config = Config.load()
 
+
 def analyze(participants: Participants) -> dict[str, dict[str, list[dict[str, str]]]]:
     result = {}
     for vl in participants.root:
@@ -36,21 +37,26 @@ async def send_message(message: Message):
     participants = await GoggleClient.get_all_table_users()
     data = analyze(participants)
     mail_text = ""
+    dates = {"Москва": "МОСКВА 09.08",
+             "Екатеринбург": "ЕКАТЕРИНБУРГ 10.08"}
     for city in data:
-        text = get_mes("mailing", data=data[city])
-        mail_text += text + "\n" + 70 * "-" + "\n"
+        text = get_mes("mailing", data=data[city], date=dates[city])
+        mail_text += text + "\n" + 40 * "-" + "\n"
     await bot.send_message(chat_id=user_id,
-                           text=mail_text+"\n\nОтправить пользователям текст?",
+                           text=mail_text + "\n\nОтправить пользователям текст?",
                            reply_markup=keyboards.confirm_mailing)
+
 
 @router.callback_query(F.data == "mailing_confirm")
 async def confirm_mailing(message: CallbackQuery):
     participants = await GoggleClient.get_all_table_users()
     data = analyze(participants)
     texts = {}
+    dates = {"Москва": "МОСКВА 09.08",
+             "Екатеринбург": "ЕКАТЕРИНБУРГ 10.08"}
     for city in data:
         if city not in texts:
-            texts[city] = get_mes("mailing", data=data[city])
+            texts[city] = get_mes("mailing", data=data[city], date=dates[city])
         for team in data[city]:
             for user in data[city][team]:
                 try:
@@ -59,4 +65,6 @@ async def confirm_mailing(message: CallbackQuery):
                     logger.info(f"{user["id"]} | {city}")
                 except:
                     pass
+
+
 mailing_rt = router
