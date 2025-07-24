@@ -55,7 +55,7 @@ async def confirm_mailing(message: CallbackQuery):
     dates = {"Москва": "МОСКВА 09.08",
              "Екатеринбург": "ЕКАТЕРИНБУРГ 10.08"}
     for city in data:
-        if not city:
+        if city == "":
             continue
         if city not in texts:
             texts[city] = get_mes("mailing", data=data[city], date=dates.get(city, ""))
