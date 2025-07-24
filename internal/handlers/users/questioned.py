@@ -59,8 +59,11 @@ async def step_message(message: Message, state: FSMContext):
         user = await users.get(user_id)
         user.city = questioned.city
         user.full_name = questioned.full_name
-        user.age = questioned.age
-        user.position = questioned.position
+        user.closer_choice = questioned.closer_choice
+        user.preferred_pattern = questioned.preferred_pattern
+        user.attraction_mode = questioned.attraction_mode
+        user.metaphor_preference = questioned.metaphor_preference
+
         user.ai_level = questioned.ai_level
         await users.update(user)
         await state.clear()
@@ -92,8 +95,11 @@ async def step_callback(message: CallbackQuery, state: FSMContext):
         user = await users.get(user_id)
         user.city = questioned.city
         user.full_name = questioned.full_name
-        user.age = questioned.age
-        user.position = questioned.position
+        user.closer_choice = questioned.closer_choice
+        user.preferred_pattern = questioned.preferred_pattern
+        user.attraction_mode = questioned.attraction_mode
+        user.metaphor_preference = questioned.metaphor_preference
+
         user.ai_level = questioned.ai_level
         await users.update(user)
         await state.clear()
