@@ -30,7 +30,7 @@ async def start(message: Message | CallbackQuery):
     else:
         await bot.send_message(chat_id=id,
                                text=get_mes(f"reset"),
-        )
+                               )
 
 
 start_rt = router

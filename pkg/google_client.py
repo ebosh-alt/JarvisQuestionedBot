@@ -34,7 +34,12 @@ INDEXES_COLUMNS = {
     6: "F",
     7: "G",
     8: "H",
+    9: "I",
+    10: "J",
 }
+
+
+
 SERVICE_ACCOUNT_FILE = "config/service_account.json"
 MOSCOW_TZ = pytz.timezone("Europe/Moscow")
 
@@ -87,10 +92,12 @@ class Client:
                 if isinstance(obj, User):
                     values = [
                         obj.id,
-                        obj.city,
                         obj.full_name,
-                        obj.age,
-                        obj.position,
+                        obj.city,
+                        obj.closer_choice,
+                        obj.preferred_pattern,
+                        obj.attraction_mode,
+                        obj.metaphor_preference,
                         obj.ai_level,
                         datetime.datetime.now(MOSCOW_TZ).strftime("%Y-%m-%d %H:%M:%S"),
                     ]

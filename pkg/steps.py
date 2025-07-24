@@ -18,21 +18,29 @@ class StepsSchema(BaseModel):
 
 steps_schema = StepsSchema(steps=[
     StepField(
-        name="city",
-        prompt="📍 В каком городе ты будешь участвовать в мероприятии?",
-        keyboard=keyboards.cities,
-    ),
-    StepField(
         name="full_name",
         prompt="📝 Как тебя зовут? (Имя и фамилия полностью)",
     ),
     StepField(
-        name="age",
-        prompt="📆 Сколько тебе лет?",
+        name="city",
+        prompt="📍 В каком городе ты будешь участвовать в мероприятии?",
+        keyboard=keyboards.city,
     ),
     StepField(
-        name="position",
-        prompt="💼 Какая у тебя должность?",
+        name="closer_choice",
+        prompt="Что вам ближе?",
+    ),
+    StepField(
+        name="preferred_pattern",
+        prompt="Какой образ вам ближе?",
+    ),
+    StepField(
+        name="attraction_mode",
+        prompt="Что вас больше привлекает?",
+    ),
+    StepField(
+        name="metaphor_preference",
+        prompt="С какой метафорой вы себя скорее ассоциируете?",
     ),
     StepField(
         name="ai_level",

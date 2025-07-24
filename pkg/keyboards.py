@@ -57,11 +57,43 @@ class Keyboards:
         return Builder.create_keyboard(buttons)
 
     @property
-    def cities(self):
+    def city(self):
         buttons = {
             "Москва": "Москва",
             "Екатеринбург": "Екатеринбург",
 
+        }
+        return Builder.create_keyboard(buttons)
+
+    @property
+    def closer_choice(self):
+        buttons = {
+            "🪞 Отражение": "🪞 Отражение",
+            "🔮 Прогноз": "🔮 Прогноз"
+        }
+        return Builder.create_keyboard(buttons)
+
+    @property
+    def preferred_pattern(self):
+        buttons = {
+            "🧩 Мозаика": "🧩 Мозаика",
+            "🛠 Конструктор": "🛠 Конструктор"
+        }
+        return Builder.create_keyboard(buttons)
+
+    @property
+    def attraction_mode(self):
+        buttons = {
+            "💡 Импульс": "💡 Импульс",
+            "🧠 Алгоритм": "🧠 Алгоритм"
+        }
+        return Builder.create_keyboard(buttons)
+
+    @property
+    def metaphor_preference(self):
+        buttons = {
+            "🌱 Среда для роста": "🌱 Среда для роста",
+            "🧭 Система навигации": "🧭 Система навигации"
         }
         return Builder.create_keyboard(buttons)
 
@@ -81,4 +113,6 @@ class Keyboards:
             "Отправить": "mailing_confirm",
         }
         return Builder.create_keyboard(buttons)
+
+
 keyboards: Keyboards = Keyboards()

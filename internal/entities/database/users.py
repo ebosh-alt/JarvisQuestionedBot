@@ -14,11 +14,14 @@ class User(Base):
 
     id = Column(BigInteger, primary_key=True)
     username = Column(String)
-    city = Column(String)
     full_name = Column(String)
-    age = Column(String)
-    position = Column(String)
+    city = Column(String)
+    closer_choice = Column(String)
+    preferred_pattern = Column(String)
+    attraction_mode = Column(String)
+    metaphor_preference = Column(String)
     ai_level = Column(String)
+
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     refs = []
@@ -26,11 +29,13 @@ class User(Base):
     def dict(self):
         return {
             "id": self.id,
-            "city": self.username,
-            "full_name": self.created_at,
-            "age": self.created_at,
-            "position": self.created_at,
-            "ai_level": self.created_at,
+            "username": self.username,
+            "full_name": self.full_name,
+            "city": self.city,
+            "closer_choice": self.closer_choice,
+            "preferred_pattern": self.preferred_pattern,
+            "attraction_mode": self.attraction_mode,
+            "metaphor_preference": self.metaphor_preference,
             "created_at": self.created_at,
         }
 
