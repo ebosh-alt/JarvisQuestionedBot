@@ -40,6 +40,8 @@ async def send_message(message: Message):
     dates = {"Москва": "МОСКВА 09.08",
              "Екатеринбург": "ЕКАТЕРИНБУРГ 10.08"}
     for city in data:
+        if city == "":
+            continue
         text = get_mes("mailing", data=data[city], date=dates[city])
         mail_text += text + "\n" + 40 * "-" + "\n"
     await bot.send_message(chat_id=user_id,
