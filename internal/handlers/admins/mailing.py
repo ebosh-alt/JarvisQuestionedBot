@@ -22,10 +22,10 @@ def analyze(participants: Participants) -> dict[str, dict[str, list[dict[str, st
     for vl in participants.root:
         if not result.get(vl.city):
             result[vl.city] = {}
-
-        if not result[vl.city].get(vl.team):
-            result[vl.city][vl.team] = []
-        result[vl.city][vl.team].append({"id": vl.id, "full_name": vl.full_name})
+        if vl.team:
+            if not result[vl.city].get(vl.team):
+                result[vl.city][vl.team] = []
+            result[vl.city][vl.team].append({"id": vl.id, "full_name": vl.full_name})
     for city, teams in result.items():
         result[city] = {k: v for k, v in sorted(teams.items())}
     return result
